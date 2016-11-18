@@ -1,0 +1,3 @@
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:view_codes), admin_promotion_codes_path(promotion_id: promotion), { class: "btn-success", icon: 'th-large' } if promotion.support_multiple_coupon? %>
+<% end %>

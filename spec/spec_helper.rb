@@ -1,5 +1,6 @@
 # Run Coverage report
 require 'simplecov'
+
 SimpleCov.start do
   add_filter 'spec/dummy'
   add_group 'Controllers', 'app/controllers'
@@ -12,12 +13,12 @@ end
 
 # Configure Rails Environment
 ENV['RAILS_ENV'] = 'test'
-
 require File.expand_path('../dummy/config/environment.rb',  __FILE__)
 
 require 'rspec/rails'
 require 'database_cleaner'
 require 'ffaker'
+require 'shoulda-matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -29,6 +30,7 @@ require 'spree/testing_support/capybara_ext'
 require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/factories'
 require 'spree/testing_support/url_helpers'
+require 'rspec/active_model/mocks'
 
 # Requires factories defined in lib/spree_promotion_coupons/factories.rb
 require 'spree_promotion_coupons/factories'
@@ -46,6 +48,7 @@ RSpec.configure do |config|
   # visit spree.admin_path
   # current_path.should eql(spree.products_path)
   config.include Spree::TestingSupport::UrlHelpers
+  config.include Spree::TestingSupport::ControllerRequests, type: :controller
 
   # == Mock Framework
   #
@@ -84,4 +87,14 @@ RSpec.configure do |config|
 
   config.fail_fast = ENV['FAIL_FAST'] || false
   config.order = "random"
+
+  Shoulda::Matchers.configure do |shoulda_config|
+    shoulda_config.integrate do |with|
+      # Choose a test framework:
+      with.test_framework :rspec
+
+      # Choose one or more libraries:er
+      with.library :rails
+    end
+  end
 end

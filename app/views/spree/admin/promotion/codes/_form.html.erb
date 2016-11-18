@@ -1,0 +1,16 @@
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @code } %>
+<div class="row" id="general_fields" >
+  <div class="col-md-3">
+    <%= f.field_container :code, class: ['form-group'] do %>
+      <%= f.label :code %>
+      <%= f.text_field :code, :class => 'form-control' %>
+    <% end %>
+  </div>
+
+  <div id="select-customer" class="col-md-3" data-hook>
+    <fieldset class="no-border no-border-bottom">
+      <%= hidden_field_tag :customer_search,  nil, :class => 'fullwidth title' %>
+      <%= render :partial => "spree/admin/orders/customer_details/autocomplete", :formats => :js %>
+    </fieldset>
+  </div>
+</div>

@@ -3,3 +3,6 @@
 
 en:
   hello: "Hello world"
+  spree:
+    add_new_codes: 'ADD NEW CODES'
+    view_codes: 'VIEW CODES'
