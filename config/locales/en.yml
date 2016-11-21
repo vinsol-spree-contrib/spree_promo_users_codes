@@ -4,5 +4,5 @@
 en:
   hello: "Hello world"
   spree:
-    add_new_codes: 'ADD NEW CODES'
-    view_codes: 'VIEW CODES'
+    add_new_codes: 'Add New Code'
+    view_codes: 'View Codes'

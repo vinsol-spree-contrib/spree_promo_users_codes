@@ -24,14 +24,14 @@
       </tr>
     </thead>
     <tbody>
-      <% @codes.each do |promotion| %>
-        <tr id="<%= spree_dom_id promotion %>" class="<%= cycle('odd', 'even')%>">
-          <td class="align-center"><%= promotion.code %></td>
-          <td class="align-center"><%= promotion.user.email %></td>
-          <td class="align-center"><%= promotion.used %></td>
+      <% @codes.each do |promotion_code| %>
+        <tr id="<%= spree_dom_id promotion_code %>" class="<%= cycle('odd', 'even')%>">
+          <td class="align-center"><%= promotion_code.code %></td>
+          <td class="align-center"><%=link_to  promotion_code.user.email, admin_user_path(promotion_code.user) %></td>
+          <td class="align-center"><%= promotion_code.used %></td>
           <td class="actions">
-            <%= link_to_edit promotion, { url: edit_admin_promotion_code_path(@promotion, promotion),no_text: true } %>
-            <%= link_to_delete promotion, { url: admin_promotion_code_path(@promotion, promotion),no_text: true } %>
+            <%= link_to_edit promotion_code, { url: edit_admin_promotion_code_path(@promotion, promotion_code),no_text: true } %>
+            <%= link_to_delete promotion_code, { url: admin_promotion_code_path(@promotion, promotion_code),no_text: true } %>
           </td>
         </tr>
       <% end %>
