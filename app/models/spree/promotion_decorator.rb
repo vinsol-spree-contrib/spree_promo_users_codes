@@ -1,6 +1,6 @@
 Spree::Promotion.class_eval do
   has_many :codes, class_name: Spree::Promotion::Code, dependent: :destroy
-  has_many :promotable_users, through: :codes, source: :euser
+  has_many :promotable_users, through: :codes, source: :user
 
   def self.with_coupon_code(coupon_code)
     code = coupon_code.strip.downcase
