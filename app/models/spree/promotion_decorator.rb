@@ -20,12 +20,7 @@ Spree::Promotion.class_eval do
     end
 
     def authorized?(promotable)
-      promotable_user  = promotable.try(:user) || promotable.try(:order).try(:user)
-      case promotable
-      when Spree::LineItem
-        promotable_user && promotable_users.include?(promotable_user)
-      when Spree::Order
-        promotable_user && promotable_users.include?(promotable_user)
-      end
+      promotable_user = promotable.is_a?(Spree::Order) ? promotable.user : promotable.order.user
+      promotable_user && promotable_users.include?(promotable_user)
     end
 end

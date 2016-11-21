@@ -6,7 +6,7 @@ module Spree
 
         private
           def model_class
-            "Spree::Promotion::#{ controller_name.classify }".constantize
+            Spree::Promotion::Code
           end
 
           def permitted_resource_params

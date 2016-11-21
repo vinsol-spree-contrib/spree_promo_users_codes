@@ -49,8 +49,6 @@ describe Spree::Admin::Promotion::CodesController, type: :controller do
         send_request(promotion_id: promotion.id)
         expect(flash[:alert]).to eq("No promotions found")
       end
-
-      )
     end
   end
 end
