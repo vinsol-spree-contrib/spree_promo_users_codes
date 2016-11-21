@@ -10,7 +10,23 @@ describe Spree::Promotion::Code, type: :model do
     it { is_expected.to validate_presence_of(:promotion) }
     it { is_expected.to validate_presence_of(:code) }
     it { is_expected.to validate_presence_of(:user) }
-    it { is_expected.to validate_uniqueness_of(:code) }
-    it { is_expected.to validate_uniqueness_of(:user) }
+    it { is_expected.to validate_uniqueness_of(:user).scoped_to(:promotion).allow_blank }
+
+    context '#code_uniqueness' do
+      let(:user) { create :user }
+      let(:promotion) do
+        promotion = Spree::Promotion.create(multi_coupon: true)
+        promotion.codes.create(code: 'test', user: user)
+        promotion
+      end
+
+      before do
+        new_promotion = Spree::Promotion.new(code: 'test')
+      end
+
+      it 'expect record to be invalid' do
+        expect{ new_promotion.valid?.to be false }
+      end
+    end
   end
 end

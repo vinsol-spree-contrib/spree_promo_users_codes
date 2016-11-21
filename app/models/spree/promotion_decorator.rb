@@ -2,9 +2,9 @@ Spree::Promotion.class_eval do
   has_many :codes, class_name: Spree::Promotion::Code, dependent: :destroy
   has_many :promotable_users, through: :codes, source: :user
 
-  def self.with_coupon_code(coupon_code)
+  def self.with_coupon_code(coupon_code='')
     code = coupon_code.strip.downcase
-    joins(:codes).where("lower(#{self.table_name}.code) = ? OR lower(#{Spree::Promotion::Code.table_name}.code) = ?", code, code).first
+    joins('LEFT JOIN spree_promotion_codes ON spree_promotions.id = spree_promotion_codes.promotion_id').where("lower(spree_promotions.code) = ? OR lower(spree_promotion_codes.code) = ?", code, code).first
   end
 
   def eligible?(promotable)
@@ -16,7 +16,7 @@ Spree::Promotion.class_eval do
   private
 
     def multi_coupon_eligible?(promotable)
-      multi_coupon? ? authorized?(promotable) : false
+      multi_coupon? ? authorized?(promotable) : true
     end
 
     def authorized?(promotable)

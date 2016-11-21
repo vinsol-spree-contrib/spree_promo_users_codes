@@ -82,5 +82,31 @@ describe Spree::Promotion, type: :model do
         end
       end
     end
+
+    context 'self.with_coupon_code' do
+      let(:promotion) { Promotion.create(name: "At line items", code: 'test') }
+      let(:multi_promotion) do
+        promotion = Spree::Promotion.create(multi_coupon: true)
+        promotion.codes.build(code: 'test2', user: user)
+        promotion
+      end
+
+      context 'when code is present on spree_promotions' do
+        it 'user to return promotion' do
+          expect {
+            Spree::Promotion.with_coupon_code(test).to eq(promotion)
+          }
+        end
+      end
+
+      context 'when code is present on spree_promotion_codes' do
+        it 'user to return promotion' do
+          expect {
+            Spree::Promotion.with_coupon_code(test).to eq(promotion)
+          }
+        end
+      end
+
+    end
   end
 end
