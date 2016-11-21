@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name        = 'spree_promotion_coupons'
   s.version     = '2.4.3'
   s.summary     = 'Adds multicoupon functionality to app'
-  s.description = 'Promotion Multicoupon is a extension that adds functionality to a share single promotion to various users using multicoupons'
+  s.description = 'Promotion Multicoupon is an spree-extension. Admin can share promotion among users, using multicoupons'
   s.required_ruby_version = '>= 1.9.3'
 
   s.author    = ['Mayank', 'Anurag']
