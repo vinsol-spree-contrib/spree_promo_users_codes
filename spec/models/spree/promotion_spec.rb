@@ -28,35 +28,56 @@ describe Spree::Promotion, type: :model do
         before do
           product.promotionable = promotionable
         end
-        context "and product is promotionable" do
+        context "when product is promotionable" do
           let(:promotionable) { true }
           it { is_expected.to be true }
+
+          context 'when multi_coupon is false' do
+            before do
+              promotion.multi_coupon = false
+            end
+            it { is_expected.to be false }
+          end
         end
-        context "and product is not promotionable" do
+        context "when product is not promotionable" do
           let(:promotionable) { false }
           it { is_expected.to be false }
         end
       end
 
       context "when promotable is a Spree::Order" do
-        let(:promotable) { create :order, user: user  }
-        context "and it is empty" do
+        let(:promotable) { create :order, user: user }
+        context "when it is empty" do
           it { is_expected.to be true }
+
+          context 'when multi_coupon is false' do
+            before do
+              promotion.multi_coupon = false
+            end
+            it { is_expected.to be false }
+          end
         end
-        context "and it contains items" do
+        context "when it contains items" do
           let!(:line_item) { create(:line_item, order: promotable) }
-          context "and the items are all non-promotionable" do
+          context "when the items are all non-promotionable" do
             before do
               line_item.product.update_column(:promotionable, false)
             end
             it { is_expected.to be false }
           end
 
-          context "and at least one item is promotionable" do
+          context "when at least one item is promotionable" do
             before do
               line_item.product.update_column(:promotionable, true)
             end
             it { is_expected.to be true }
+
+            context 'when multi_coupon is false' do
+            before do
+              promotion.multi_coupon = false
+            end
+            it { is_expected.to be false }
+          end
           end
         end
       end

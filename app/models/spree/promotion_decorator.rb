@@ -1,5 +1,6 @@
 Spree::Promotion.class_eval do
   has_many :codes, class_name: Spree::Promotion::Code, dependent: :destroy
+  has_many :promotable_users, through: :codes, source: :euser
 
   def self.with_coupon_code(coupon_code)
     code = coupon_code.strip.downcase
@@ -26,9 +27,5 @@ Spree::Promotion.class_eval do
       when Spree::Order
         promotable_user && promotable_users.include?(promotable_user)
       end
-    end
-
-    def promotable_users
-      @promotable_users ||= codes.map(&:user)
     end
 end

@@ -6,3 +6,9 @@ en:
   spree:
     add_new_codes: 'Add New Code'
     view_codes: 'View Codes'
+    code_already_present: 'has already been taken'
+    edit_code: 'edit code'
+    promotion_codes: 'promotion codes'
+    back_to_promotion: 'back to promotion'
+    used: 'used'
+    new_code: 'new code'
