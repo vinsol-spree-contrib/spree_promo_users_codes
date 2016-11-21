@@ -2,9 +2,9 @@
   <%= Spree.t(:edit_code) %>
 <% end %>
 
-<%= form_for :code, :url => collection_url do |f| %>
-  <%= render :partial => 'form', :locals => { :f => f } %>
+<%= form_for :code, url: admin_promotion_code_path(promotion_id: @promotion, id: @code), method: :patch do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
   <div class="text-center">
-    <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+    <%= render partial: 'spree/admin/shared/edit_resource_links' %>
   </div>
 <% end %>

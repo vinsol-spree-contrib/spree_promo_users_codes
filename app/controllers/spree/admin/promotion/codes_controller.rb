@@ -2,7 +2,7 @@ module Spree
   module Admin
     module Promotion
       class CodesController < ResourceController
-        before_action :load_promotion, only: :index
+        belongs_to 'spree/promotion'
 
         private
           def model_class
@@ -10,12 +10,11 @@ module Spree
           end
 
           def permitted_resource_params
-            params.require(:code).permit(:code).merge({ user_id: params[:customer_search], promotion_id: params[:promotion_id] })
+            params.require(:code).permit(:code, :user_id)
           end
 
-          def load_promotion
-            @promotion ||= Spree::Promotion.find_by(id: params[:promotion_id])
-            redirect_to admin_promotions_path, alert: Spree.t(:no_promotions_found) unless @promotion.present?
+          def collection_url
+            admin_promotion_codes_path(@promotion)
           end
       end
     end
