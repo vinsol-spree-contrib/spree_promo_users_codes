@@ -61,18 +61,5 @@ describe Spree::Promotion, type: :model do
         end
       end
     end
-
-    context '#support_multiple_coupon?' do
-      subject { promotion.support_multiple_coupon? }
-      context 'when support multiple coupon' do
-        it { is_expected.to be true }
-      end
-      context 'when does not support multiple coupon' do
-        before do
-          promotion.multi_coupon = false
-        end
-        it { is_expected.to be false }
-      end
-    end
   end
 end

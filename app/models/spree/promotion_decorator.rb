@@ -6,10 +6,6 @@ Spree::Promotion.class_eval do
     joins(:codes).where("lower(#{self.table_name}.code) = ? OR lower(#{Spree::Promotion::Code.table_name}.code) = ?", code, code).first
   end
 
-  def support_multiple_coupon?
-    multi_coupon?
-  end
-
   def eligible?(promotable)
     return false if (expired? || usage_limit_exceeded?(promotable) || blacklisted?(promotable)) ||  !multi_coupon_eligible?(promotable)
     !!eligible_rules(promotable, {})
@@ -19,15 +15,16 @@ Spree::Promotion.class_eval do
   private
 
     def multi_coupon_eligible?(promotable)
-      support_multiple_coupon? ? authorized?(promotable) : false
+      multi_coupon? ? authorized?(promotable) : false
     end
 
     def authorized?(promotable)
+      promotable_user  = promotable.try(:user) || promotable.try(:order).try(:user)
       case promotable
       when Spree::LineItem
-        promotable.order.user && promotable_users.include?(promotable.order.user)
+        promotable_user && promotable_users.include?(promotable_user)
       when Spree::Order
-        promotable.user && promotable_users.include?(promotable.user)
+        promotable_user && promotable_users.include?(promotable_user)
       end
     end
 

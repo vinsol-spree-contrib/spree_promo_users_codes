@@ -11,5 +11,6 @@ describe Spree::Promotion::Code, type: :model do
     it { is_expected.to validate_presence_of(:code) }
     it { is_expected.to validate_presence_of(:user) }
     it { is_expected.to validate_uniqueness_of(:code) }
+    it { is_expected.to validate_uniqueness_of(:user) }
   end
 end

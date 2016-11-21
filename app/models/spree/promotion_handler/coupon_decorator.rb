@@ -1,10 +1,11 @@
 Spree::PromotionHandler::Coupon.class_eval do
   def determine_promotion_application_result
     detector = lambda { |p|
-      if p.source.promotion.support_multiple_coupon? && order.user && p.source.promotion.codes.present?
-        p.source.promotion.codes.where(user: order.user, code: order.coupon_code.downcase).present?
-      elsif p.source.promotion.code
-        p.source.promotion.code.downcase == order.coupon_code.downcase
+      source_promotion = p.source.promotion
+      if source_promotion.multi_coupon? && order.user && source_promotion.codes.present?
+        source_promotion.codes.where(user: order.user, code: order.coupon_code.downcase).present?
+      elsif source_promotion.code
+        source_promotion.code.downcase == order.coupon_code.downcase
       end
     }
 
