@@ -11,7 +11,7 @@ module Spree
 
     private
       def code_uniqueness
-        if Spree::Promotion.with_coupon_code(code).exists?
+        if Spree::Promotion.with_coupon_code(code).present?
           errors.add(:code, Spree.t(:code_already_present))
         end
       end
