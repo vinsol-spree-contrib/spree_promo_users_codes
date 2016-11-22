@@ -8,9 +8,10 @@ en:
         one: Code
         other: Codes
   spree:
+    code:
+      already_present: 'has already been taken'
     add_new_codes: 'Add New Code'
     view_codes: 'View Codes'
-    code_already_present: 'has already been taken'
     edit_code: 'Edit Code'
     promotion_codes: 'Promotion Codes'
     back_to_promotion: 'Back to Promotion'

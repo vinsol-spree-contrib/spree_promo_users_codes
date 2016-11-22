@@ -3,8 +3,8 @@ require "spec_helper"
 describe Spree::Promotion, type: :model do
   let(:user) { create :user }
   let(:promotion) do
-    promotion = Spree::Promotion.new(multi_coupon: true)
-    promotion.codes.build(code: 'test', user: user)
+    promotion = Spree::Promotion.create(name: 'test_promotion', multi_coupon: true)
+    promotion.codes.create(code: 'test', user: user)
     promotion
   end
 
@@ -15,7 +15,9 @@ describe Spree::Promotion, type: :model do
   describe 'methods' do
     context "#eligible?" do
       let(:promotable) { create :order, user: user }
+
       subject { promotion.eligible?(promotable) }
+
       context "when promotion is expired" do
         before { promotion.expires_at = Time.now - 10.days }
         it { is_expected.to be false }
@@ -36,25 +38,35 @@ describe Spree::Promotion, type: :model do
             before do
               promotion.multi_coupon = false
             end
-            it { is_expected.to be false }
+            it { is_expected.to be true }
           end
         end
         context "when product is not promotionable" do
           let(:promotionable) { false }
           it { is_expected.to be false }
-        end
-      end
-
-      context "when promotable is a Spree::Order" do
-        let(:promotable) { create :order, user: user }
-        context "when it is empty" do
-          it { is_expected.to be true }
 
           context 'when multi_coupon is false' do
             before do
               promotion.multi_coupon = false
             end
             it { is_expected.to be false }
+          end
+        end
+      end
+
+      context "when promotable is a Spree::Order" do
+        let(:promotable) { create :order, user: user }
+        context "when it is empty" do
+          before do
+            promotion.save
+          end
+          it { is_expected.to be true }
+
+          context 'when multi_coupon is false' do
+            before do
+              promotion.multi_coupon = false
+            end
+            it { debugger; is_expected.to be true }
           end
         end
         context "when it contains items" do
@@ -76,7 +88,7 @@ describe Spree::Promotion, type: :model do
             before do
               promotion.multi_coupon = false
             end
-            it { is_expected.to be false }
+            it { is_expected.to be true }
           end
           end
         end
