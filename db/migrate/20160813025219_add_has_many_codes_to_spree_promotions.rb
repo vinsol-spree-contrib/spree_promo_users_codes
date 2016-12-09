@@ -1,5 +1,5 @@
 class AddHasManyCodesToSpreePromotions < ActiveRecord::Migration
   def change
-    add_column :spree_promotions, :has_many_codes, :boolean, default: false
+    add_column :spree_promotions, :multi_coupon, :boolean, default: false, null: false
   end
 end

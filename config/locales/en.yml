@@ -2,4 +2,18 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      spree/promotion/code:
+        one: Code
+        other: Codes
+  spree:
+    code:
+      already_present: 'has already been taken'
+    add_new_codes: 'Add New Code'
+    view_codes: 'View Codes'
+    edit_code: 'Edit Code'
+    promotion_codes: 'Promotion Codes'
+    back_to_promotion: 'Back to Promotion'
+    used: 'used'
+    new_code: 'New Code'

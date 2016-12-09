@@ -3,12 +3,12 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_promotion_coupons'
   s.version     = '2.4.3'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.summary     = 'Adds multicoupon functionality to app'
+  s.description = 'Promotion Multicoupon is a Spree extension. Admin can share promotion among users, using multiple coupons'
   s.required_ruby_version = '>= 1.9.3'
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
+  s.author    = ['Mayank', 'Anurag']
+  s.email     = 'info@vinsol.com'
   # s.homepage  = 'http://www.spreecommerce.com'
 
   #s.files       = `git ls-files`.split("\n")
@@ -26,6 +26,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-rails',  '~> 3.1'
   s.add_development_dependency 'sass-rails', '~> 4.0.2'
   s.add_development_dependency 'selenium-webdriver'
+  s.add_development_dependency 'shoulda-matchers', '~> 3.1.0'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'rspec-activemodel-mocks'
 end

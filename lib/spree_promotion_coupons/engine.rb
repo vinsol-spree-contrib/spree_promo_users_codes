@@ -15,6 +15,10 @@ module SpreePromotionCoupons
       end
     end
 
+    initializer 'spree_item_returns.assets_precompile' do |app|
+      app.config.assets.precompile += %w( spree/backend/single_user_picker.js )
+    end
+
     config.to_prepare &method(:activate).to_proc
   end
 end

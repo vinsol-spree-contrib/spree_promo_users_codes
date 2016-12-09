@@ -1,0 +1,9 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:new_code) %>
+<% end %>
+<%= form_for :code, url: admin_promotion_codes_path(@promotion) do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+  <div class="text-center">
+    <%= render partial: 'spree/admin/shared/new_resource_links', locals: { collection_url: admin_promotion_codes_path(@promotion) } %>
+  </div>
+<% end %>
