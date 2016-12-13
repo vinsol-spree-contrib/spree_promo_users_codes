@@ -3,7 +3,7 @@ Spree::Core::Engine.routes.draw do
 
   namespace :admin do
     scope module: 'promotion' do
-      resources :promotions do
+      resources :promotions, only: [] do
         resources :codes
       end
     end
