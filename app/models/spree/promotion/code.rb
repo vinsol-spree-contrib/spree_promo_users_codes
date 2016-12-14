@@ -5,7 +5,7 @@ module Spree
     belongs_to :promotion, class_name: Spree::Promotion
     belongs_to :user, class_name: Spree.user_class, foreign_key: :user_id
 
-    validates :promotion, :code, :user, presence: true
+    validates :promotion, :code, presence: true
     validates :user, uniqueness: { scope: :promotion_id }, allow_blank: :true
     validate :code_uniqueness
 

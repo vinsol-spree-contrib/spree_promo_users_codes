@@ -9,7 +9,6 @@ describe Spree::Promotion::Code, type: :model do
   describe 'validations' do
     it { is_expected.to validate_presence_of(:promotion) }
     it { is_expected.to validate_presence_of(:code) }
-    it { is_expected.to validate_presence_of(:user) }
     it { expect(create(:promotion_code)).to validate_uniqueness_of(:user).scoped_to(:promotion).allow_blank }
 
     context '#code_uniqueness' do

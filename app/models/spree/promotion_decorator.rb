@@ -9,19 +9,7 @@ Spree::Promotion.class_eval do
   end
 
   def eligible?(promotable)
-    return false if (expired? || usage_limit_exceeded?(promotable) || blacklisted?(promotable)) ||  !multi_coupon_eligible?(promotable)
+    return false if (expired? || usage_limit_exceeded?(promotable) || blacklisted?(promotable))
     !!eligible_rules(promotable, {})
   end
-
-
-  private
-
-    def multi_coupon_eligible?(promotable)
-      multi_coupon? ? authorized?(promotable) : true
-    end
-
-    def authorized?(promotable)
-      promotable_user = promotable.is_a?(Spree::Order) ? promotable.user : promotable.order.user
-      promotable_user && promotable_users.include?(promotable_user)
-    end
 end
