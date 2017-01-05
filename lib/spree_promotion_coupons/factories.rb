@@ -3,4 +3,12 @@ FactoryGirl.define do
   #
   # Example adding this to your spec_helper will load these Factories for use:
   # require 'spree_promotion_coupons/factories'
+
+  FactoryGirl.define do
+    factory :promotion_code, class: Spree::Promotion::Code do
+      code { |n| "code-#{n}" }
+      promotion
+      user
+    end
+  end
 end

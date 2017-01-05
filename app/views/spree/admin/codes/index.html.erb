@@ -1,0 +1,40 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:promotion_codes) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:back_to_promotion), edit_admin_promotion_path(id: @promotion), { icon: 'arrow-left', class: 'btn-success' } %>
+  <%= button_link_to Spree.t(:add_new_codes), new_admin_promotion_code_path(promotion_id: @promotion), { icon: 'plus', class: 'btn-success' }  %>
+<% end %>
+
+<%= paginate @codes %>
+
+<% if @codes.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><%= Spree.t(:code) %></th>
+        <th><%= Spree.t(:user) %></th>
+        <th><%= Spree.t(:used) %></th>
+        <th class="actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @codes.each do |promotion_code| %>
+        <tr id="<%= spree_dom_id promotion_code %>" class="">
+          <td><%= promotion_code.code %></td>
+          <td><%=link_to  promotion_code.user.email, admin_user_path(promotion_code.user) %></td>
+          <td><%= promotion_code.used ? 'Yes' : 'No' %></td>
+          <td class="actions actions-2">
+            <%= link_to_delete promotion_code, { url: admin_promotion_code_path(@promotion, promotion_code),no_text: true } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Promotion::Code)) %>,
+    <%= link_to Spree.t(:add_one), spree.new_admin_promotion_code_path(@promotion) %>!
+  </div>
+<% end %>

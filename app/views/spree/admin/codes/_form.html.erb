@@ -2,16 +2,15 @@
 
 <%= render partial: 'spree/shared/error_messages', locals: { target: @code } %>
 <div class="row" id="general_fields" >
-  <div class="col-md-3">
+  <div class="col-md-4">
     <%= f.field_container :code, class: ['form-group'] do %>
       <%= f.label :code %>
       <%= f.text_field :code, class: 'form-control' %>
     <% end %>
   </div>
 
-  <div class="field alpha omega eight columns">
-  <label><%= Spree.t('user_rule.choose_users') %></label><br>
-  <input type='hidden' name='code[user_id]' class='single_user_picker fullwidth' value="<%= @code.user_id %>" data-hook="single_user_picker">
-</div>
-
+  <div class="field col-md-8">
+    <label><%= Spree.t('user_rule.choose_users') %></label><br>
+    <input type='hidden' name='code[user_id]' class='single_user_picker fullwidth-input' value="<%= @code.user_id %>" data-hook="single_user_picker">
+  </div>
 </div>

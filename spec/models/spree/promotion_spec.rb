@@ -13,7 +13,7 @@ describe Spree::Promotion, type: :model do
   end
 
   describe 'methods' do
-    context "#eligible?" do
+    describe "#eligible?" do
       let(:promotable) { create :order, user: user }
 
       subject { promotion.eligible?(promotable) }
@@ -41,6 +41,7 @@ describe Spree::Promotion, type: :model do
             it { is_expected.to be true }
           end
         end
+
         context "when product is not promotionable" do
           let(:promotionable) { false }
           it { is_expected.to be false }
@@ -66,9 +67,10 @@ describe Spree::Promotion, type: :model do
             before do
               promotion.multi_coupon = false
             end
-            it { debugger; is_expected.to be true }
+            it { is_expected.to be true }
           end
         end
+
         context "when it contains items" do
           let!(:line_item) { create(:line_item, order: promotable) }
           context "when the items are all non-promotionable" do
@@ -85,17 +87,24 @@ describe Spree::Promotion, type: :model do
             it { is_expected.to be true }
 
             context 'when multi_coupon is false' do
-            before do
-              promotion.multi_coupon = false
+              before do
+                promotion.multi_coupon = false
+              end
+              it { is_expected.to be true }
             end
-            it { is_expected.to be true }
-          end
+
+            context 'when code is already used' do
+              before do
+                promotion.codes.first.update_column(:used, true)
+              end
+              it { is_expected.to be false }
+            end
           end
         end
       end
     end
 
-    context 'self.with_coupon_code' do
+    describe '.with_coupon_code' do
       let(:promotion) { Promotion.create(name: "At line items", code: 'test') }
       let(:multi_promotion) do
         promotion = Spree::Promotion.create(multi_coupon: true)

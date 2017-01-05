@@ -3,7 +3,7 @@
 <% end %>
 <%= form_for :code, url: admin_promotion_codes_path(@promotion) do |f| %>
   <%= render partial: 'form', locals: { f: f } %>
-  <div class="text-center">
+  <div>
     <%= render partial: 'spree/admin/shared/new_resource_links', locals: { collection_url: admin_promotion_codes_path(@promotion) } %>
   </div>
 <% end %>

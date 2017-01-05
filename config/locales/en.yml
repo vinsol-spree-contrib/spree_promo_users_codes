@@ -3,17 +3,20 @@
 
 en:
   activerecord:
+    attributes:
+      spree/promotion:
+        multi_coupon: Multi Coupon
     models:
       spree/promotion/code:
         one: Code
         other: Codes
   spree:
-    code:
+    promotion_code:
       already_present: 'has already been taken'
-    add_new_codes: 'Add New Code'
-    view_codes: 'View Codes'
-    edit_code: 'Edit Code'
-    promotion_codes: 'Promotion Codes'
-    back_to_promotion: 'Back to Promotion'
-    used: 'used'
-    new_code: 'New Code'
+      add_new_codes: 'Add New Code'
+      view_codes: 'View Codes'
+      edit_code: 'Edit Code'
+      promotion_codes: 'Promotion Codes'
+      back_to_promotion: 'Back to Promotion'
+      used: 'used'
+      new_code: 'New Code'

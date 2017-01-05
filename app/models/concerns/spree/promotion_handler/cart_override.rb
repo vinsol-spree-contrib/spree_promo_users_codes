@@ -3,8 +3,7 @@ module Spree
     module CartOverride
       private
         def promotions
-          promo_table = Promotion.arel_table
-          super.where(promo_table[:multi_coupon].eq(false))
+          super.reject { |promotion| promotion.multi_coupon }
         end
     end
   end

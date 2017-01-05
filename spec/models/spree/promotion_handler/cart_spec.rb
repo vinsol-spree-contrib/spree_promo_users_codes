@@ -5,15 +5,15 @@ describe Spree::PromotionHandler::Cart, :type => :model do
   let(:line_item) { create(:line_item) }
   let(:order) { line_item.order }
 
-  let(:promotion) { Promotion.create(name: "At line items") }
-  let(:multi_promotion) { Promotion.create(name: "At line items", multi_coupon: true) }
+  let(:promotion) { Spree::Promotion.create(name: "At line items") }
+  let(:multi_promotion) { Spree::Promotion.create(name: "At line items", multi_coupon: true) }
 
-  let(:calculator) { Calculator::FlatPercentItemTotal.new(preferred_flat_percent: 10) }
+  let(:calculator) { Spree::Calculator::FlatPercentItemTotal.new(preferred_flat_percent: 10) }
 
-  subject { Cart.new(order, line_item) }
+  subject { Spree::PromotionHandler::Cart.new(order, line_item) }
 
   context "activates in LineItem level" do
-    let!(:action) { Promotion::Actions::CreateItemAdjustments.create(promotion: promotion, calculator: calculator) }
+    let!(:action) { Spree::Promotion::Actions::CreateItemAdjustments.create(promotion: promotion, calculator: calculator) }
     let(:adjustable) { line_item }
 
     shared_context "creates the adjustment" do
@@ -29,14 +29,14 @@ describe Spree::PromotionHandler::Cart, :type => :model do
     end
 
     context "promotion includes item involved" do
-      let!(:rule) { Promotion::Rules::Product.create(products: [line_item.product], promotion: promotion) }
+      let!(:rule) { Spree::Promotion::Rules::Product.create(products: [line_item.product], promotion: promotion) }
 
       include_context "creates the adjustment"
     end
 
     context "promotion has item total rule" do
       let(:shirt) { create(:product) }
-      let!(:rule) { Promotion::Rules::ItemTotal.create(preferred_operator_min: 'gt', preferred_amount_min: 50, preferred_operator_max: 'lt', preferred_amount_max: 150, promotion: promotion) }
+      let!(:rule) { Spree::Promotion::Rules::ItemTotal.create(preferred_operator_min: 'gt', preferred_amount_min: 50, preferred_operator_max: 'lt', preferred_amount_max: 150, promotion: promotion) }
 
       before do
         # Makes the order eligible for this promotion
@@ -49,7 +49,7 @@ describe Spree::PromotionHandler::Cart, :type => :model do
   end
 
   context "activates in Order level" do
-    let!(:action) { Promotion::Actions::CreateAdjustment.create(promotion: promotion, calculator: calculator) }
+    let!(:action) { Spree::Promotion::Actions::CreateAdjustment.create(promotion: promotion, calculator: calculator) }
     let(:adjustable) { order }
 
     shared_context "creates the adjustment" do
