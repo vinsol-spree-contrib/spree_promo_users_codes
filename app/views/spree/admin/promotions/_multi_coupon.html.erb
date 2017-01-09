@@ -1,6 +1,8 @@
 <div class="col-md-6">
-  <%= f.field_container :multi_coupon, class: ['form-group'] do %>
-    <%= f.check_box :multi_coupon, class: 'form-control' %>
-    <%= f.label :multi_coupon %>
+  <%= f.field_container :multi_coupon, class: ['checkbox'] do %>
+    <%= f.label :multi_coupon do %>
+      <%= f.check_box :multi_coupon %>
+      <%= Spree.t(:multi_coupon) %>
+    <% end %>
   <% end %>
 </div>

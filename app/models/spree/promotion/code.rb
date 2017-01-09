@@ -1,5 +1,5 @@
 module Spree
-  class Promotion::Code < ActiveRecord::Base
+  class Promotion::Code < Spree::Base
     self.table_name = :spree_promotion_codes
 
     belongs_to :promotion, class_name: Spree::Promotion
@@ -12,7 +12,7 @@ module Spree
     private
       def code_uniqueness
         if Spree::Promotion.with_coupon_code(code).present?
-          errors.add(:code, Spree.t(:already_present, scope: :code))
+          errors.add(:code, Spree.t(:already_present, scope: :promotion_code))
         end
       end
   end

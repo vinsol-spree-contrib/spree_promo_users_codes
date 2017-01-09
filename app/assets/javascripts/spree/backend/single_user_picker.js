@@ -8,7 +8,7 @@ $.fn.singleUserAutocomplete = function () {
       $.get(Spree.routes.user_search, {
         ids: element.val()
       }, function (data) {
-        callback(data);
+        callback(data.users[0]);
       });
     },
     ajax: {
@@ -21,7 +21,7 @@ $.fn.singleUserAutocomplete = function () {
       },
       results: function (data) {
         return {
-          results: data
+          results: data.users
         };
       }
     },

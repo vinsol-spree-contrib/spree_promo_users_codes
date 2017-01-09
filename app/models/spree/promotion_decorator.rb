@@ -22,6 +22,6 @@ Spree::Promotion.class_eval do
 
     def authorized?(promotable)
       promotable_user = promotable.is_a?(Spree::Order) ? promotable.user : promotable.order.user
-      promotable_user && promotable_users.include?(promotable_user)
+      promotable_user && promotable_users.include?(promotable_user) && !codes.where(user: promotable_user).first.used?
     end
 end

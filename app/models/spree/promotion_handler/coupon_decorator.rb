@@ -20,6 +20,7 @@ Spree::PromotionHandler::Coupon.class_eval do
     if (discount && discount.eligible) || created_line_items
       order.update_totals
       order.persist_totals
+      update_used_for_promotion_code
       set_success_code :coupon_code_applied
     else
       # if the promotion exists on an order, but wasn't found above,
@@ -30,6 +31,14 @@ Spree::PromotionHandler::Coupon.class_eval do
         # if the promotion was created after the order
         set_error_code :coupon_code_not_found
       end
+    end
+  end
+
+  def update_used_for_promotion_code
+    promotion = order.promotions.with_coupon_code(order.coupon_code)
+    if promotion.multi_coupon? && promotion.usage_limit?
+      promotion_code = promotion.codes.find_by(code: order.coupon_code)
+      promotion_code.update_column(:used, true)
     end
   end
 end
