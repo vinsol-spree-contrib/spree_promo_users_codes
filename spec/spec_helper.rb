@@ -32,8 +32,8 @@ require 'spree/testing_support/factories'
 require 'spree/testing_support/url_helpers'
 require 'rspec/active_model/mocks'
 
-# Requires factories defined in lib/spree_promotion_coupons/factories.rb
-require 'spree_promotion_coupons/factories'
+# Requires factories defined in lib/spree_promo_users_codes/factories.rb
+require 'spree_promo_users_codes/factories'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
