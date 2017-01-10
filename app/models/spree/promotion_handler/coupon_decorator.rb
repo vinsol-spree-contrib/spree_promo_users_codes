@@ -36,7 +36,7 @@ Spree::PromotionHandler::Coupon.class_eval do
 
   def update_used_for_promotion_code
     promotion = order.promotions.with_coupon_code(order.coupon_code)
-    if promotion.multi_coupon? && promotion.usage_limit?
+    if promotion.multi_coupon?
       promotion_code = promotion.codes.find_by(code: order.coupon_code)
       promotion_code.update_column(:used, true)
     end
