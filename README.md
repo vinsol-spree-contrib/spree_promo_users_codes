@@ -9,7 +9,7 @@ Installation
 Add spree_promotion_coupons to your Gemfile:
 
 ```ruby
-gem 'spree_promotion_coupons',   github: 'vinsol/spree_promotion_coupons',   branch: 'x-x-stable'
+gem 'spree_promotion_coupons',   github: 'vinsol/spree_promotion_coupons',   branch: '3-1-stable'
 ```
 
 Bundle your dependencies and run the installation generator:
