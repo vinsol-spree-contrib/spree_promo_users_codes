@@ -1,4 +1,4 @@
-module SpreePromotionCoupons
+module SpreePromoUsersCodes
   module Generators
     class InstallGenerator < Rails::Generators::Base
 

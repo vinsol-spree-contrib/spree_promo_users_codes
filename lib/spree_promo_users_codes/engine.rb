@@ -1,4 +1,4 @@
-module SpreePromotionCoupons
+module SpreePromoUsersCodes
   class Engine < Rails::Engine
     require 'spree/core'
     isolate_namespace Spree
