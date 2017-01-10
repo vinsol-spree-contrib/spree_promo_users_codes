@@ -1,22 +1,22 @@
-SpreePromotionCoupons
+SpreePromoUsersCodes
 =====================
 
-SpreePromotionCoupons is an extension for spree admins to generate customised coupon codes for their customers. It enables the admin to create coupon codes for each promotion by marking it as multi-coupon and creating unique codes for the customers he/she wants to send the codes to. The codes are e-mailed to the customer so the code is known only to him/her.
+SpreePromoUsersCodes is an extension for spree admins to generate customised coupon codes for their customers. It enables the admin to create coupon codes for each promotion by marking it as multi-coupon and creating unique codes for the customers he/she wants to send the codes to. The codes are e-mailed to the customer so the code is known only to him/her.
 
 Installation
 ------------
 
-Add spree_promotion_coupons to your Gemfile:
+Add spree_promo_users_codes to your Gemfile:
 
 ```ruby
-gem 'spree_promotion_coupons',   github: 'vinsol/spree_promotion_coupons',   branch: '3-0-stable'
+gem 'spree_promo_users_codes',   github: 'vinsol-spree-contribe/spree_promo_users_codes',   branch: '3-0-stable'
 ```
 
 Bundle your dependencies and run the installation generator:
 
 ```shell
 bundle
-bundle exec rails g spree_promotion_coupons:install
+bundle exec rails g spree_promo_users_codes:install
 ```
 
 Usage
@@ -45,14 +45,6 @@ First bundle your dependencies, then run `rake`. `rake` will default to building
 ```shell
 bundle
 bundle exec rake
-```
-
-When testing your application's integration with this extension you may use it's factories.
-
-Simply add this statement to your spec_helper:
-
-```ruby
-require 'spree_promotion_coupons/factories'
 ```
 
 Copyright (c) 2016 VinSol, released under the New BSD License.
