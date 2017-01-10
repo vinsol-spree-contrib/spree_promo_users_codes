@@ -4,19 +4,14 @@ $.fn.singleUserAutocomplete = function () {
   this.select2({
     minimumInputLength: 1,
     multiple: false,
-    initSelection: function (element, callback) {
-      $.get(Spree.routes.user_search, {
-        ids: element.val()
-      }, function (data) {
-        callback(data.users[0]);
-      });
-    },
     ajax: {
-      url: Spree.routes.user_search,
+      url: Spree.routes.users_api,
       datatype: 'json',
+      cache: true,
       data: function (term) {
         return {
-          q: term
+          q: term,
+          token: Spree.api_key
         };
       },
       results: function (data) {
