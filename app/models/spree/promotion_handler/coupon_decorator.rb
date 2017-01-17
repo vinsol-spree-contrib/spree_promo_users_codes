@@ -3,7 +3,7 @@ Spree::PromotionHandler::Coupon.class_eval do
     detector = lambda { |p|
       source_promotion = p.source.promotion
       if source_promotion.multi_coupon? && order.user && source_promotion.codes.present?
-        source_promotion.codes.where(user: order.user, code: order.coupon_code.downcase).present?
+        source_promotion.codes.where(user: order.user).where("LOWER(code) = ?", order.coupon_code.downcase).present?
       elsif source_promotion.code
         source_promotion.code.downcase == order.coupon_code.downcase
       end
