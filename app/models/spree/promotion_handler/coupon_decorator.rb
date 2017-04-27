@@ -1,23 +1,19 @@
 Spree::PromotionHandler::Coupon.class_eval do
   def determine_promotion_application_result
-    detector = lambda { |p|
+    # Check for applied adjustments.
+    discount = order.all_adjustments.promotion.eligible.detect do |p|
       source_promotion = p.source.promotion
       if source_promotion.multi_coupon? && order.user && source_promotion.codes.present?
         source_promotion.codes.where(user: order.user).where("LOWER(code) = ?", order.coupon_code.downcase).present?
-      elsif source_promotion.code
-        source_promotion.code.downcase == order.coupon_code.downcase
+      else
+        source_promotion.code.try(:downcase) == order.coupon_code.downcase
       end
-    }
-
-    # Check for applied adjustments.
-    discount = order.line_item_adjustments.promotion.detect(&detector)
-    discount ||= order.shipment_adjustments.promotion.detect(&detector)
-    discount ||= order.adjustments.promotion.detect(&detector)
+    end
 
     # Check for applied line items.
     created_line_items = promotion.actions.detect { |a| a.type == 'Spree::Promotion::Actions::CreateLineItems' }
 
-    if (discount && discount.eligible) || created_line_items
+    if discount || created_line_items
       order.update_totals
       order.persist_totals
       update_used_for_promotion_code
