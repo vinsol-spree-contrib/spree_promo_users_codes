@@ -7,6 +7,7 @@ describe Spree::Promotion, type: :model do
     promotion.codes.create(code: 'test', user: user)
     promotion
   end
+  let(:multi_promotion_code) { 'multi' }
 
   describe 'associations' do
     it { is_expected.to have_many(:codes).class_name('Spree::Promotion::Code').dependent(:destroy) }
@@ -107,7 +108,7 @@ describe Spree::Promotion, type: :model do
     describe '.with_coupon_code' do
       let(:promotion) { Promotion.create(name: "At line items", code: 'test') }
       let(:multi_promotion) do
-        promotion = Spree::Promotion.create(multi_coupon: true)
+        promotion = Spree::Promotion.create(multi_coupon: true, code: multi_promotion_code)
         promotion.codes.build(code: 'test2', user: user)
         promotion
       end
@@ -124,6 +125,14 @@ describe Spree::Promotion, type: :model do
         it 'user to return promotion' do
           expect {
             Spree::Promotion.with_coupon_code(test).to eq(promotion)
+          }
+        end
+      end
+
+      context 'when code of the master promotion is applied' do
+        it 'does not return the promotion' do
+          expect {
+            Spree::Promotion.with_coupon_code(multi_promotion_code).to be_nil
           }
         end
       end
