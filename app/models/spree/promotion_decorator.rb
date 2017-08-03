@@ -5,7 +5,7 @@ Spree::Promotion.class_eval do
   def self.with_coupon_code(coupon_code)
     code = coupon_code.to_s.strip.downcase
     joins('LEFT JOIN spree_promotion_codes ON spree_promotions.id = spree_promotion_codes.promotion_id')
-    .where("lower(spree_promotions.code) = ? OR lower(spree_promotion_codes.code) = ?", code, code).first
+    .find_by("(lower(spree_promotions.code) = ? AND spree_promotions.multi_coupon != 1) OR lower(spree_promotion_codes.code) = ?", code, code)
   end
 
   def eligible?(promotable)
