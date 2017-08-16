@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 
-describe Spree::PromotionHandler::Cart, :type => :model do
+describe Spree::PromotionHandler::Cart, type: :model do
   let(:line_item) { create(:line_item) }
   let(:order) { line_item.order }
 
