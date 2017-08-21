@@ -5,7 +5,7 @@ Spree::Promotion.class_eval do
   def self.with_coupon_code(coupon_code)
     code = coupon_code.to_s.strip.downcase
     joins('LEFT JOIN spree_promotion_codes ON spree_promotions.id = spree_promotion_codes.promotion_id')
-    .find_by("(lower(spree_promotions.code) = ? AND spree_promotions.multi_coupon = ?) OR lower(spree_promotion_codes.code) = ?", code, false, code)
+    .find_by("(lower(spree_promotions.code) = ? AND spree_promotions.multi_coupon = ?) OR (lower(spree_promotion_codes.code) = ? AND spree_promotions.multi_coupon = ?)", code, false, code, true)
   end
 
   def eligible?(promotable)
@@ -23,6 +23,6 @@ Spree::Promotion.class_eval do
     def authorized?(promotable)
       promotable_user = promotable.is_a?(Spree::Order) ? promotable.user : promotable.order.user
       already_included_in_order = promotable.is_a?(Spree::Order) ? promotable.promotions.include?(self) : promotable.order.promotions.include?(self)
-      promotable_user && promotable_users.include?(promotable_user) && (!codes.where(user: promotable_user).first.used? || already_included_in_order)
+      promotable_user && promotable_users.include?(promotable_user) && (!codes.where(user: promotable_user, used: true).exists? || already_included_in_order)
     end
 end
