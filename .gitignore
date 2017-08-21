@@ -13,3 +13,5 @@ pkg
 *.swp
 spec/dummy
 .byebug_history
+ruby-gemset
+gemfiles/*.gemfile.lock

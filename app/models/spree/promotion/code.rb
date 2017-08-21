@@ -2,10 +2,12 @@ module Spree
   class Promotion::Code < Spree::Base
     self.table_name = :spree_promotion_codes
 
-    belongs_to :promotion, class_name: Spree::Promotion
-    belongs_to :user, class_name: Spree.user_class, foreign_key: :user_id
+    with_options required: true do
+      belongs_to :promotion, class_name: Spree::Promotion
+      belongs_to :user, class_name: Spree.user_class, foreign_key: :user_id
+    end
 
-    validates :promotion, :code, :user, presence: true
+    validates :code, presence: true
     validates :user, uniqueness: { scope: :promotion_id }, allow_blank: :true
     validate :code_uniqueness
 
