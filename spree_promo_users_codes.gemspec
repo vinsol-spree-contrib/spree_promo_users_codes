@@ -3,8 +3,11 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_promo_users_codes'
   s.version     = '3.1.0'
-  s.summary     = 'Adds multicoupon functionality to app'
-  s.description = 'Promo users codes is a Spree extension. Admin can share promotion among users, using multiple coupons'
+  s.summary     = 'Adds multiple coupon code for a promotion with
+    respect to users functionality to the application'
+  s.description = "It's an extension that provides a functionality
+    to create multiple coupons for a promotion with respect to a
+    user and these codes can only be used once"
   s.required_ruby_version = '>= 1.9.3'
 
   s.author    = ['Mayank', 'Anurag', 'Chetna']
@@ -16,8 +19,9 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'spree_core',                    '~> 3.1.0'
-  s.add_dependency 'spree_backend',                    '~> 3.1.0'
+  s.add_dependency 'spree_backend',                 '~> 3.1.0'
 
+  s.add_development_dependency 'appraisal'
   s.add_development_dependency 'capybara',          '~> 2.4'
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'database_cleaner'

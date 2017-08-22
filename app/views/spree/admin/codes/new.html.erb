@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:new_code) %>
+  <%= Spree.t(:new_code, scope: :promotion_code) %>
 <% end %>
 <%= form_for :code, url: admin_promotion_codes_path(@promotion) do |f| %>
   <%= render partial: 'form', locals: { f: f } %>

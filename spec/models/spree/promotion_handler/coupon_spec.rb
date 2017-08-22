@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 
-describe Spree::PromotionHandler::Coupon, :type => :model do
+describe Spree::PromotionHandler::Coupon, type: :model do
   let(:order) { FactoryGirl.create(:completed_order_with_pending_payment) }
   let(:promotion) { Spree::Promotion.create!(name: "new promotion", multi_coupon: true) }
   let(:promotion_code) { promotion.codes.create!(code: 'test', user: order.user) }

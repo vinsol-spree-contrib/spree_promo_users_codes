@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:edit_code) %>
+  <%= Spree.t(:edit_code, scope: :promotion_code) %>
 <% end %>
 
 <%= form_for :code, url: admin_promotion_code_path(promotion_id: @promotion, id: @code), method: :patch do |f| %>

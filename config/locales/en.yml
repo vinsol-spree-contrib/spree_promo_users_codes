@@ -12,11 +12,14 @@ en:
         other: Codes
   spree:
     promotion_code:
-      already_present: 'has already been taken'
-      add_new_codes: 'Add New Code'
-      view_codes: 'View Codes'
-      edit_code: 'Edit Code'
-      promotion_codes: 'Promotion Codes'
-      back_to_promotion: 'Back to Promotion'
-      used: 'used'
-      new_code: 'New Code'
+      add_new_codes: Add New Code
+      already_present: has already been taken
+      back_to_promotion: Back to Promotion
+      back_to_promotion_codes: Back to Promotion Codes
+      codes: Promotion Codes
+      edit_code: Edit Code
+      multi_coupon: Multi Coupon
+      new_code: New Code
+      promotion_codes: Promotion Codes
+      used: used
+      view_codes: View Codes
