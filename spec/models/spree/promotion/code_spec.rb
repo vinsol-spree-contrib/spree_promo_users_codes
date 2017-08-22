@@ -7,9 +7,9 @@ describe Spree::Promotion::Code, type: :model do
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:promotion) }
+    it { is_expected.to validate_presence_of(:promotion).with_message(:required) }
     it { is_expected.to validate_presence_of(:code) }
-    it { is_expected.to validate_presence_of(:user) }
+    it { is_expected.to validate_presence_of(:user).with_message(:required) }
 
     context 'promotion_id uniqueness to user' do
       let!(:promotion1) { FactoryGirl.create(:promotion) }

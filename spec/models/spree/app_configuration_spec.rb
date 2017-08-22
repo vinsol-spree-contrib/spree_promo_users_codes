@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Spree::AppConfiguration, :type => :model do
+describe Spree::AppConfiguration, type: :model do
 
   describe 'codes_per_page' do
     it { expect(Spree::Config).to have_preference(:codes_per_page) }

@@ -2,7 +2,7 @@
   <%= f.field_container :multi_coupon, class: ['checkbox'] do %>
     <%= f.label :multi_coupon do %>
       <%= f.check_box :multi_coupon %>
-      <%= Spree.t(:multi_coupon) %>
+      <%= Spree.t(:multi_coupon, scope: :promotion_code) %>
     <% end %>
   <% end %>
 </div>

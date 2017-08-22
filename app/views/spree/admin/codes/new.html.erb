@@ -1,6 +1,11 @@
 <% content_for :page_title do %>
-  <%= Spree.t(:new_code) %>
+  <%= Spree.t(:new_code, scope: :promotion_code) %>
 <% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:back_to_promotion_codes, scope: :promotion_code), admin_promotion_codes_path(promotion_id: @promotion), { class: "btn-success", icon: 'th-large' } %>
+<% end %>
+
 <%= form_for :code, url: admin_promotion_codes_path(@promotion) do |f| %>
   <%= render partial: 'form', locals: { f: f } %>
   <div>
