@@ -3,8 +3,8 @@ module Spree
     self.table_name = :spree_promotion_codes
 
     with_options required: true do
-      belongs_to :promotion, class_name: Spree::Promotion
-      belongs_to :user, class_name: Spree.user_class, foreign_key: :user_id
+      belongs_to :promotion, class_name: 'Spree::Promotion'
+      belongs_to :user, class_name: Spree.user_class.to_s, foreign_key: :user_id
     end
 
     validates :code, presence: true
