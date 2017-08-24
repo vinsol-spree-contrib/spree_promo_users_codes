@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
   s.name         = 'spree_promo_users_codes'
-  s.version      = '3.2.0'
+  s.version      = '3.3.0'
   s.summary      = 'Adds multiple coupon code for a promotion with
     respect to users functionality to the application'
   s.description  = "It's an extension that provides a functionality
