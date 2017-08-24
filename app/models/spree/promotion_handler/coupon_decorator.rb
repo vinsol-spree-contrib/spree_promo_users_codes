@@ -3,7 +3,7 @@ Spree::PromotionHandler::Coupon.class_eval do
     detector = lambda { |p|
       source_promotion = p.source.promotion
       if source_promotion.multi_coupon? && order.user && source_promotion.codes.present?
-        source_promotion.codes.where(user: order.user).where("LOWER(code) = ?", order.coupon_code.downcase).present?
+        source_promotion.codes.where("user_id = ? AND LOWER(code) = ?", order.user.id, order.coupon_code.downcase).present?
       elsif source_promotion.code
         source_promotion.code.downcase == order.coupon_code.downcase
       end
@@ -25,7 +25,7 @@ Spree::PromotionHandler::Coupon.class_eval do
     else
       # if the promotion exists on an order, but wasn't found above,
       # we've already selected a better promotion
-      if order.promotions.with_coupon_code(order.coupon_code)
+      if order.promotions.with_coupon_code(order.coupon_code, order.user)
         set_error_code :coupon_code_better_exists
       else
         # if the promotion was created after the order
@@ -35,10 +35,19 @@ Spree::PromotionHandler::Coupon.class_eval do
   end
 
   def update_used_for_promotion_code
-    promotion = order.promotions.with_coupon_code(order.coupon_code)
+    promotion = order.promotions.with_coupon_code(order.coupon_code, order.user)
     if promotion.multi_coupon?
       promotion_code = promotion.codes.where("LOWER(code) = ?", order.coupon_code.downcase).first
       promotion_code.update_column(:used, true)
+    end
+  end
+
+  def promotion_exists_on_order?
+    if promotion.multi_coupon?
+      applicable_multi_coupon = promotion.codes.where(user: order.user, used: true).first
+      (order.promotions.include? promotion) && applicable_multi_coupon && (applicable_multi_coupon.code.downcase == order.coupon_code.try(:downcase))
+    else
+      order.promotions.include? promotion
     end
   end
 end
