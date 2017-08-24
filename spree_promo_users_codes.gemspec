@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.2.7'
 
-  s.add_dependency 'spree_core',                        '~> 3.3.0'
+  s.add_dependency 'spree_core',                        '~> 3.4.0.alpha'
   s.add_dependency 'spree_extension',                   '~> 0.0.5'
 
   s.add_development_dependency 'appraisal'
