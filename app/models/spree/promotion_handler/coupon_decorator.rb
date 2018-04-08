@@ -38,7 +38,7 @@ Spree::PromotionHandler::Coupon.class_eval do
     end
   end
 
-  def promotion_exists_on_order?
+  def promotion_exists_on_order?(order, promotion)
     if promotion.multi_coupon?
       applicable_multi_coupon = promotion.codes.where(user: order.user, used: true).first
       (order.promotions.include? promotion) && applicable_multi_coupon && (applicable_multi_coupon.code.downcase == order.coupon_code.try(:downcase))
