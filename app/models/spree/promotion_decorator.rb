@@ -27,9 +27,9 @@ Spree::Promotion.class_eval do
     def authorized?(promotable)
       promotable_order = promotable.is_a?(Spree::Order) ? promotable : promotable.order
       promotable_user, coupon_code = promotable_order.user, promotable_order.coupon_code
-      already_included_in_order = promotable_order.promotions.include?(self) || promotable_order.all_adjustments.eligible.any? { |adjustment| adjustment.source.promotion == self }
+      already_included_in_order = promotable_order.promotions.include?(self) || promotable_order.all_adjustments.eligible.promotion.any? { |adjustment| adjustment.source.promotion == self }
 
-      if coupon_code.blank? || codes.where("user_id = ? AND lower(code) = ?", promotable_user.id, coupon_code).exists?
+      if coupon_code.blank? || codes.where("user_id = ? AND lower(code) = ?", promotable_user.try(:id), coupon_code).exists?
         if already_included_in_order
           promotable_user && promotable_users.include?(promotable_user)
         else
