@@ -14,7 +14,7 @@ appraise 'spree-3-4' do
 end
 
 appraise 'spree-3-5' do
-  gem 'spree', github: 'spree/spree', branch: 'master'
+  gem 'spree',             github: 'spree/spree',             branch: '3-5-stable'
   gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: 'master'
 end
 
