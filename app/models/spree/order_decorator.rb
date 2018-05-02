@@ -4,8 +4,8 @@ Spree::Order.class_eval do
 
   def update_multi_coupon_codes
     promotion_ids = all_adjustments.promotion.eligible.map { |a| a.source.promotion_id }
-    promotion = promotions.where(id: promotion_ids).where(multi_coupon: true).last
-    update_used_for_promotion_code(promotion)
+    promotions_applied = promotions.where(id: promotion_ids).where(multi_coupon: true).uniq
+    promotions_applied.each { |promotion| update_used_for_promotion_code(promotion) }
     update_used_for_promotion_code(create_line_item_promotion)
   end
 
