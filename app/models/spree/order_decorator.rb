@@ -3,16 +3,19 @@ Spree::Order.class_eval do
   state_machine.after_transition to: :complete, do: :update_multi_coupon_codes
 
   def update_multi_coupon_codes
-    promotion_ids = all_adjustments.promotion.eligible.map { |a| a.source.promotion_id }
-    promotions_applied = promotions.where(id: promotion_ids).where(multi_coupon: true).uniq
-    promotions_applied.each { |promotion| update_used_for_promotion_code(promotion) }
-    update_used_for_promotion_code(create_line_item_promotion)
+    multi_coupon_promotions = create_line_item_promotions + adjustment_promotions
+    multi_coupon_promotions.each { |promotion| update_used_for_promotion_code(promotion) }
   end
 
   private
 
-    def create_line_item_promotion
-      promotions.joins(:promotion_actions).where(spree_promotion_actions: { type: 'Spree::Promotion::Actions::CreateLineItems' }).last
+    def adjustment_promotions
+      promotion_ids = all_adjustments.promotion.eligible.map { |adjustment| adjustment.source.promotion_id }
+      promotions.where(id: promotion_ids).where(multi_coupon: true).uniq
+    end
+
+    def create_line_item_promotions
+      promotions.where(multi_coupon: true).joins(:promotion_actions).where(spree_promotion_actions: { type: 'Spree::Promotion::Actions::CreateLineItems' })
     end
 
     def update_used_for_promotion_code(promotion)
