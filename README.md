@@ -3,18 +3,29 @@ SpreePromoUsersCodes
 
 SpreePromoUsersCodes is an extension which helps an admin to generate customized coupon codes for a promotion for their customers. It enables the admin to create coupon codes for each promotion by marking it as multi-coupon and creating unique codes for the customers he/she wants to send the codes to. These codes can only be used once. The codes are e-mailed to the customer so the code is known only to him/her.
 
+Demo
+----
+Try Spree Promo Users Codes for Spree 3-4 with direct deployment on Heroku:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-promo-users-codes-3-4)
+
+Try Spree Promo Users Codes for Spree master with direct deployment on Heroku:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/vinsol-spree-contrib/spree-demo-heroku/tree/spree-promo-users-codes-master)
+
+
 Installation
 ------------
 
 1. Add this extension to your Gemfile:
 
-  #### Spree >= 3.3
+  #### Spree >= 3.2
 
   ```ruby
   gem 'spree_promo_users_codes', github: 'vinsol-spree-contrib/spree_promo_users_codes', branch: 'master'
   ```
 
-  #### Spree < 3.3
+  #### Spree < 3.2
 
   ```ruby
   gem 'spree_promo_users_codes', github: 'vinsol-spree-contrib/spree_promo_users_codes', branch: 'X-X-stable'
