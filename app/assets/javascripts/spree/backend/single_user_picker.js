@@ -7,10 +7,11 @@ $.fn.singleUserAutocomplete = function () {
     ajax: {
       url: Spree.routes.users_api,
       datatype: 'json',
-      cache: true,
       data: function (term) {
         return {
-          q: term,
+          q: {
+            email_cont: term
+          },
           token: Spree.api_key
         };
       },

@@ -11,6 +11,7 @@ en:
         one: Code
         other: Codes
   spree:
+    user: User
     promotion_code:
       add_new_codes: Add New Code
       already_present: has already been taken
